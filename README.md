@@ -2,14 +2,16 @@
 
 ## users テーブル
 
-| Column     | Type     | Options                   |
-| ---------- | -------- | ------------------------- |
-| nickname   | string   | null: false               |
-| email      | string   | null: false, unique: true |
-| password   | string   | null: false               |
-| name       | string   | null: false               |
-| name_kana  | string   | null: false               |
-| birthday   | datetime | null: false               |
+| Column               | Type     | Options                   |
+| -------------------- | -------- | ------------------------- |
+| nickname             | string   | null: false               |
+| email                | string   | null: false, unique: true |
+| encrypted_password   | string   | null: false               |
+| last_name            | string   | null: false               |
+| first_name           | string   | null: false               |
+| last_name_kana       | string   | null: false               |
+| first_name_kana      | string   | null: false               |
+| birthday             | date     | null: false               |
 
 ### Association
 
@@ -18,22 +20,22 @@
 
 ## items テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ------     | ------------------------------ |
-| title      | string     | null: false                    |
-| price      | integer    | null: false,                   |
-| user       | references | null: false, foreign_key: true |
-| catch_copy | text       | null: false                    |
-| category   | string     | null: false                    |
-| state      | string     | null: false                    |
-| postage    | string     | null: false                    |
-| address    | string     | null: false                    |
-| time       | integer    | null: false                    |
+| Column      | Type       | Options                        |
+| ----------- | ------     | ------------------------------ |
+| title       | string     | null: false                    |
+| price       | integer    | null: false,                   |
+| user        | references | null: false, foreign_key: true |
+| catch_copy  | text       | null: false                    |
+| category_id | integer    | null: false                    |
+| state_id    | integer    | null: false                    |
+| postage_id  | integer    | null: false                    |
+| address_id  | integer    | null: false                    |
+| time_id     | integer    | null: false                    |
 
 ### Association
 
-- belongs_to :users
-- has_one    :buys
+- belongs_to :user
+- has_one    :buy
 
 
 ## buys テーブル
@@ -45,26 +47,21 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 - has_one :buy_address
 
 ## buys_address テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| telephone   | references | null: false, foreign_key: true |
-| postcode    | string     | null: false                    |
-| prefecture  | string     | null: false                    |
-| city        | string     | null: false                    |
-| block       | string     | null: false                    |
-| building    | string     |                                |
-| card_number | integer    | null: false                    |
-| card_month  | integer    | null: false                    |
-| card_year   | integer    | null: false                    |
-| card_cvc    | integer    | null: false                    |
-
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| telephone     | integer    | null: false                    |
+| postcode      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
 
 ### Association
 
-- belongs_to :buys
+- belongs_to :buy
