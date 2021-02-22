@@ -57,10 +57,11 @@
 | ------------- | ---------- | ------------------------------ |
 | telephone     | string     | null: false                    |
 | postcode      | string     | null: false                    |
-| prefecture_id | references | null: false, foreign_key: true |
-| city          | references | null: false, foreign_key: true |
-| block         | references | null: false, foreign_key: true |
-| building      | references | foreign_key: true              |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| buy           | references | foreign_key: true              |
 
 ### Association
 
