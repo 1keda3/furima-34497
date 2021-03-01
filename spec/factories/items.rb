@@ -8,7 +8,7 @@ FactoryBot.define do
     postage_id  { Faker::Number.within(range: 2..2) }
     address_id  { Faker::Number.within(range: 2..47) }
     delivery_id { Faker::Number.within(range: 2..3) }
-    user
+    association :user
     after(:build) do |item|
       item.image.attach(io: File.open('app/assets/images/star.png'), filename: 'star.png', content_type: 'image/png')
     end

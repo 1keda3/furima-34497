@@ -1,9 +1,15 @@
-function calculation () {
+window.addEventListener('load', () => {
+  const priceInput = document.getElementById("item-price");
+  priceInput.addEventListener("input", () => {
+    const inputValue = priceInput.value;
+    console.log(inputValue);
 
-  const tax_cul = document.getElementByID("item-price")
-  const profit_cul = docemunt.getElementByID("item-price")
+    const addTaxDom = document.getElementById("add-tax-price");
+    tax_result = inputValue * 0.1
+    addTaxDom.innerHTML = Math.floor(tax_result)
 
-  tax_cul.addEventListener('input', function(){
-    console.log("mouseover OK")
+    const profit = document.getElementById("profit");
+    profit_result = inputValue - tax_result
+    profit.innerHTML = Math.floor(profit_result)
   })
-}
+});
