@@ -2,13 +2,13 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :image
     validates :title
-    validates :price, numericality: { only_integer: true }, format: { with: /\A[300-9999999\d]+\z/}
+    validates :price, numericality: { only_integer: true }, format: { with: /\A[300-9999999\d]+\z/ }
     validates :catch_copy
-    validates :category_id, numericality: { other_than: 1 } 
-    validates :state_id, numericality: { other_than: 1 } 
-    validates :postage_id, numericality: { other_than: 1 } 
-    validates :address_id, numericality: { other_than: 1 } 
-    validates :delivery_id, numericality: { other_than: 1 } 
+    validates :category_id, numericality: { other_than: 1 }
+    validates :state_id, numericality: { other_than: 1 }
+    validates :postage_id, numericality: { other_than: 1 }
+    validates :address_id, numericality: { other_than: 1 }
+    validates :delivery_id, numericality: { other_than: 1 }
   end
 
   belongs_to :user
