@@ -30,7 +30,7 @@
 | state_id    | integer    | null: false                    |
 | postage_id  | integer    | null: false                    |
 | address_id  | integer    | null: false                    |
-| time_id     | integer    | null: false                    |
+| delivery_id     | integer    | null: false                    |
 
 ### Association
 
