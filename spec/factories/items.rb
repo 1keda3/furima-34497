@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
-    title       { "サンプル商品" }
+    title       { 'サンプル商品' }
     price       { 1000 }
-    catch_copy  { "サンプル商品の説明" }
+    catch_copy  { 'サンプル商品の説明' }
     category_id { 2 }
     state_id    { 3 }
     postage_id  { 2 }
