@@ -55,12 +55,62 @@ RSpec.describe Item, type: :model do
       it 'userが紐付いていないと出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include('User must exist')
+        expect(@item.errors.full_messages).to include "User must exist"
       end
       it 'imageが空では保存できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include "Image can't be blank"
+      end
+      it '価格が299円以下なら出品できない' do
+        @item.price = '299'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be greater than 299"
+      end
+      it '価格が10000000以上なら出品できない' do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be less than 10000000"
+      end
+      it '価格は全角文字では登録できない' do
+        @item.price = '１００００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+      it '価格は半角英数混合では登録できない' do
+        @item.price = '10000a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+      it '価格は半角英語だけでは登録できない' do
+        @item.price = 'aaaaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+      it 'category_idが1だと登録できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Category must be other than 1"
+      end
+      it 'state_idが1だと登録できない' do
+        @item.state_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "State must be other than 1"
+      end
+      it 'postage_idが1だと登録できない' do
+        @item.postage_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Postage must be other than 1"
+      end
+      it 'address_idが1だと登録できない' do
+        @item.address_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Address must be other than 1"
+      end
+      it 'delivery_idが1だと登録できない' do
+        @item.delivery_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Delivery must be other than 1"
       end
     end
   end
