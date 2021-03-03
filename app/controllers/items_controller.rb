@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :item_find, only: [:show, :edit, :update]
   before_action :item_redirect_to, only: [:edit, :update]
 
@@ -48,5 +48,4 @@ class ItemsController < ApplicationController
   def item_redirect_to
     redirect_to action: :index unless current_user.id == @item.user_id
   end
-
 end
