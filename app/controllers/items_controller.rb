@@ -56,8 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def buy_item_redirect
-    if @item.buy.present?
-      redirect_to action: :index
-    end
+    redirect_to action: :index if @item.buy.present?
   end
 end

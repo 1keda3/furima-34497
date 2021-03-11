@@ -7,7 +7,7 @@ RSpec.describe BuysAddress, type: :model do
 
   describe '購入機能' do
     context '購入できるとき' do
-      it 'telephoneとpostcodeとprefecture_idとcityとblockがあれば購入できる' do
+      it 'telephoneとpostcodeとprefecture_idとcityとblockとtokenがあれば購入できる' do
         expect(@buy_form).to be_valid
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe BuysAddress, type: :model do
       it 'prefecture_idがない' do
         @buy_form.prefecture_id = ''
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Prefecture can't be blank", "Prefecture is not a number"
+        expect(@buy_form.errors.full_messages).to include "Prefecture can't be blank", 'Prefecture is not a number'
       end
       it 'cityがない' do
         @buy_form.city = ''
@@ -36,6 +36,11 @@ RSpec.describe BuysAddress, type: :model do
         @buy_form.block = ''
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include "Block can't be blank"
+      end
+      it 'tokenがない' do
+        @buy_form.token = ''
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
