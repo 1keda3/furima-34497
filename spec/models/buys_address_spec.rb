@@ -2,12 +2,15 @@ require 'rails_helper'
 
 RSpec.describe BuysAddress, type: :model do
   before do
-    @buy_form = FactoryBot.build(:buy_form)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @buy_form = FactoryBot.build(:buy_form, user: @user.id, item: @item.id)
+    sleep 0.1 # 0.1秒待機
   end
 
   describe '購入機能' do
     context '購入できるとき' do
-      it 'telephoneとpostcodeとprefecture_idとcityとblockとtokenがあれば購入できる' do
+      it 'telephoneとpostcodeとprefecture_idとcityとblockとtokenとuserとitemがあれば購入できる' do
         expect(@buy_form).to be_valid
       end
       it '建物番号は空でも登録できる' do
@@ -62,14 +65,14 @@ RSpec.describe BuysAddress, type: :model do
         expect(@buy_form.errors.full_messages).to include 'Prefecture must be other than 1'
       end
       it 'user_idがないと登録できない' do
-        @buy_form.user = ''
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "User can't be blank"
+        @user.id = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include
       end
       it 'item_idがないと登録できない' do
-        @buy_form.item = ''
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Item can't be blank"
+        @item.id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include
       end
       it 'telephoneは英数混合では登録できない' do
         @buy_form.telephone = 'abc1234abcd'
