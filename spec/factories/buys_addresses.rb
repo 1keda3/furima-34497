@@ -7,7 +7,7 @@ FactoryBot.define do
     block         { '青山1-1-1' }
     building      { 'ビル' }
     token         { 'tok_abcdefghijk00000000000000000' }
-    item          { 1 }
-    user          { 1 }
+    association :user
+    association :item
   end
 end

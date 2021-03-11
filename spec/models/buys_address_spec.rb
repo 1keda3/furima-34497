@@ -57,7 +57,7 @@ RSpec.describe BuysAddress, type: :model do
         expect(@buy_form.errors.full_messages).to include 'Postcode is invalid. Include hyphen(-)'
       end
       it 'prefecture_idは1だと登録できない' do
-        @buy_form.prefecture_id = '1'
+        @buy_form.prefecture_id = 1
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include 'Prefecture must be other than 1'
       end
@@ -70,6 +70,16 @@ RSpec.describe BuysAddress, type: :model do
         @buy_form.item = ''
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include "Item can't be blank"
+      end
+      it 'telephoneは英数混合では登録できない' do
+        @buy_form.telephone = 'abc1234abcd'
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include 'Telephone is invalid'
+      end
+      it 'telephoneは12桁以上では登録できない' do
+        @buy_form.telephone = '123456789012'
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include 'Telephone is invalid'
       end
     end
   end
