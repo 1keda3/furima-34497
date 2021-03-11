@@ -9,6 +9,8 @@ class BuyForm
     validates :city
     validates :block
     validates :token
+    validates :user
+    validates :item
   end
 
   def save

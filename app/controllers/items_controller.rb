@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :item_redirect_to, only: [:edit, :update, :destroy]
+  before_action :buy_item_redirect, only: [:edit, :update]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -24,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    buy_item_redirect
   end
 
   def update
