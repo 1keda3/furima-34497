@@ -64,15 +64,15 @@ RSpec.describe BuysAddress, type: :model do
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include 'Prefecture must be other than 1'
       end
-      it 'user_idがないと登録できない' do
-        @user.id = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include
+      it 'user情報が空だと登録できない' do
+        @user = nil
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include
       end
-      it 'item_idがないと登録できない' do
-        @item.id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include
+      it 'item情報が空だと登録できない' do
+        @item = nil
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include
       end
       it 'telephoneは英数混合では登録できない' do
         @buy_form.telephone = 'abc1234abcd'
