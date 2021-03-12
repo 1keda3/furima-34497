@@ -11,4 +11,4 @@ window.addEventListener('load', () => {
     profit_result = inputValue - tax_result
     profit.innerHTML = Math.floor(profit_result)
   })
-});b
+});
