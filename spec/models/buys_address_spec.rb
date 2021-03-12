@@ -4,8 +4,7 @@ RSpec.describe BuysAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @buy_form = FactoryBot.build(:buy_form, user: @user.id, item: @item.id)
-    sleep 0.1 # 0.1秒待機
+    @buy_form = FactoryBot.build(:buy_form, user_id: @user.id, item_id: @item.id)
   end
 
   describe '購入機能' do
@@ -65,14 +64,14 @@ RSpec.describe BuysAddress, type: :model do
         expect(@buy_form.errors.full_messages).to include 'Prefecture must be other than 1'
       end
       it 'user情報が空だと登録できない' do
-        @user = nil
+        @buy_form.user_id = nil
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include
+        expect(@buy_form.errors.full_messages).to include "User can't be blank"
       end
       it 'item情報が空だと登録できない' do
-        @item = nil
+        @buy_form.item_id = nil
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include
+        expect(@buy_form.errors.full_messages).to include "Item can't be blank"
       end
       it 'telephoneは英数混合では登録できない' do
         @buy_form.telephone = 'abc1234abcd'

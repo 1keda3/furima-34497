@@ -1,6 +1,6 @@
 class BuyForm
   include ActiveModel::Model
-  attr_accessor :telephone, :postcode, :prefecture_id, :city, :block, :building, :buy, :user, :item, :token, :price, :user_id
+  attr_accessor :telephone, :postcode, :prefecture_id, :city, :block, :building, :buy, :user_id, :item_id, :token, :price, :user_id
 
   with_options presence: true do
     validates :telephone, format: { with: /\A\d{10,11}\z/ }
@@ -9,8 +9,8 @@ class BuyForm
     validates :city
     validates :block
     validates :token
-    validates :user
-    validates :item
+    validates :user_id
+    validates :item_id
   end
 
   def save
